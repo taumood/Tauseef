@@ -1,0 +1,32 @@
+temp <- tempfile(fileext = ".csv")
+download.file("https://drive.google.com/open?id=1aItDYipI9u-C0jU3CNX7t9BZpkN0b8Ht",temp)
+
+
+library(googledrive)
+temp <- tempfile(fileext = ".zip")
+dl <- drive_download(as_id("1aItDYipI9u-C0jU3CNX7t9BZpkN0b8Ht"), path = temp, overwrite = TRUE)
+out <- unzip(temp, exdir = tempdir())
+
+drive_find(n_max = 30)
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+class(world)
+(sites <- data.frame(longitude = df$Surface.Longitude..WGS84., latitude = df$Surface.Latitude..WGS84.))
+ggplot(data = world) +
+  geom_sf() +
+  geom_point(data = sites, aes(x = longitude, y = latitude), size = 4, 
+             shape = 23, fill = "darkred") +
+  coord_sf(xlim = c(-120, -100), ylim = c(24.5, 46), expand = FALSE)
+
+library(rgeos)
+
+library(cowplot)
+library(googleway)
+library(ggplot2)
+library(ggrepel)
+library(ggspatial)
+library(libwgeom)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+
